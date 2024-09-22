@@ -1,18 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.drive.DriveConstants;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "auto")
-public class Odometry_Test extends LinearOpMode
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+
+@Autonomous(name = "auto2")
+public class Odometry_Test2 extends LinearOpMode
 {
     @Override public void runOpMode()
     {
@@ -24,7 +21,7 @@ public class Odometry_Test extends LinearOpMode
         /** forward (+) and backward (-) are y */
         /** Path from right red alliance station to facing red backdrop */
         //Creates starting position
-        Pose2d startPose = new Pose2d(0, 72, Math.toRadians(-90));
+        Pose2d startPose = new Pose2d(24, 72, Math.toRadians(-90));
         drive.setPoseEstimate(startPose);
 
         //Creates the robot's trajectories
@@ -34,26 +31,25 @@ public class Odometry_Test extends LinearOpMode
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), -90)
-                .lineToLinearHeading(new Pose2d(-36,50, Math.toRadians(-178)))
+                .lineTo(new Vector2d(48,48))
                 .build();
-        Trajectory traj3 = drive.trajectoryBuilder(traj2.end(), -178)
-                .lineTo(new Vector2d(-36,30))
+        Trajectory traj3 = drive.trajectoryBuilder(traj2.end(), -90)
+                .lineToLinearHeading(new Pose2d(58,63, Math.toRadians(50)))
                 .build();
-        Trajectory traj4 = drive.trajectoryBuilder(traj3.end(), -178)
-                .lineTo(new Vector2d(-48,64))
+        Trajectory traj4 = drive.trajectoryBuilder(traj3.end(), 50)
+                .lineToLinearHeading(new Pose2d(58,48, Math.toRadians(-90)))
                 .build();
-        Trajectory traj5 = drive.trajectoryBuilder(traj4.end(), -178)
-                .lineTo(new Vector2d(-43,30))
+        Trajectory traj5 = drive.trajectoryBuilder(traj4.end(), -90)
+                .lineToLinearHeading(new Pose2d(58,63, Math.toRadians(50)))
                 .build();
-        Trajectory traj6 = drive.trajectoryBuilder(traj5.end(), -178)
-                .lineTo(new Vector2d(-60,64))
+
+        Trajectory traj6 = drive.trajectoryBuilder(traj5.end(), 50)
+                .lineToLinearHeading(new Pose2d(55,34,Math.toRadians(-5)))
                 .build();
-        Trajectory traj7 = drive.trajectoryBuilder(traj6.end(), -178)
-                .lineTo(new Vector2d(-55,30))
+        Trajectory traj7 = drive.trajectoryBuilder(traj6.end(), -5)
+                .lineToLinearHeading(new Pose2d(58,63, Math.toRadians(50)))
                 .build();
-        Trajectory traj8 = drive.trajectoryBuilder(traj7.end(), -178)
-                .lineTo(new Vector2d(-65,64))
-                .build();
+
 
         //Next two lines are just for FTC OpModes
         waitForStart();
@@ -74,8 +70,8 @@ public class Odometry_Test extends LinearOpMode
         drive.followTrajectory(traj6);
         sleep(1000);
         drive.followTrajectory(traj7);
-        sleep(1000);
-        drive.followTrajectory(traj8);
+//        sleep(1000);
+//        drive.followTrajectory(traj8);
 
 //        sleep(2000);
 //        telemetry.addLine("spline 2");
